@@ -1,0 +1,24 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "author's name",
+      "email": "email@example.com"
+    }
+  ],
+  "repositories": [
+    {"type": "composer", "url": "https://packagist.phpcomposer.com"},
+    {"packagist": false}
+  ],
+  "require": {
+    "monolog/monolog": "1.15.0",
+    "pimple/pimple": "~3.0",
+    "phpoffice/phpexcel":"1.8.1",
+    "nikic/fast-route": "^0.6.0",
+    "rodneyrehm/plist": "~2.0.1",
+    "illuminate/database":"4.2.2"
+  }
+}
