@@ -1,17 +1,14 @@
 <?php
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+/**
+ * 入口文件
+ */
 
-require_once './vendor/autoload.php';
+define('APP_PATH',dirname(__FILE__) . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR);
+define('VENDOR_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'vendor' .DIRECTORY_SEPARATOR);
+define('CORE_PATH',dirname(__FILE__) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR);
 
-$loggerModel=new Logger('test');
+$autoloader = require_once VENDOR_PATH.'autoload.php';
+$autoloader->addPsr4("FreedomPHP\\Core\\", CORE_PATH);
+$autoloader->addPsr4("Application\\", APP_PATH);
 
-$log = new Logger('name');
-$log->pushHandler(new StreamHandler('/tmp/monolog.txt', Logger::WARNING));
-
-// add records to the log
-$log->addWarning('Foo',array('Freedom!'));
-$log->addError('Bar');
-
-
-?>
+require_once APP_PATH.'config'.DIRECTORY_SEPARATOR.'constant.php';

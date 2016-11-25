@@ -16,7 +16,6 @@ use Monolog\Handler\StreamHandler;
 use Psr\Log\LoggerInterface;
 use Psr\Log\InvalidArgumentException;
 
-
 /**
  * Monolog log channel
  *
