@@ -14,7 +14,7 @@ define('CORE_PATH',dirname(__FILE__) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_
  */
 $autoloader = require_once VENDOR_PATH.'autoload.php';
 $autoloader->addPsr4("FreedomPHP\\Core\\", CORE_PATH);
-$autoloader->addPsr4("Application\\", APP_PATH);
+$autoloader->addPsr4("App\\", APP_PATH);
 
 /**
  * 加载常量配置
@@ -26,6 +26,15 @@ require_once APP_PATH.'config'.DIRECTORY_SEPARATOR.'constant.php';
  */
 \FreedomPHP\Core\Helper::loadHelper('func');
 
+/**
+ * 创建应用,名称为demo
+ */
+$app = new \FreedomPHP\Core\Application('App');
+$app->setRouter(
+    [
+        ['ANY', '/u/login', ['UserController', 'login']],
+        ['ANY', '/user/reg', ['UserController', 'reg']]
+    ]
+);
+$app->run();
 
-echo 111;
-echo Input::get('a');

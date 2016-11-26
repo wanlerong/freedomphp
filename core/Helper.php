@@ -16,5 +16,4 @@ class Helper
             return require_once APP_PATH.'helper/'.$filename.'.php';
         }
     }
-
 }
