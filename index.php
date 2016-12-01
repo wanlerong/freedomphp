@@ -4,6 +4,7 @@
  * 入口文件
  */
 use \FreedomPHP\Core\Library\Input;
+use \FreedomPHP\Core\Library\Config;
 
 define('APP_PATH',dirname(__FILE__) . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR);
 define('VENDOR_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'vendor' .DIRECTORY_SEPARATOR);
@@ -30,11 +31,12 @@ require_once APP_PATH.'config'.DIRECTORY_SEPARATOR.'constant.php';
  * 创建应用,名称为demo
  */
 $app = new \FreedomPHP\Core\Application('App');
+/**
+ * 创建路由
+ */
 $app->setRouter(
-    [
-        ['ANY', '/u/login', ['UserController', 'login']],
-        ['ANY', '/user/reg', ['UserController', 'reg']]
-    ]
+    Config::get(array('route'=>array('*')))
 );
 $app->run();
+
 

@@ -88,7 +88,6 @@ class Application
 
     /**
      * 加载框架
-     * @throws Exception
      */
     public function run()
     {

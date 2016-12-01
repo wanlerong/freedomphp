@@ -9,3 +9,11 @@
 function test(){
     echo 'test';
 }
+
+
+function p($mixed = null) {
+    echo '========<br><pre>';
+    var_dump($mixed);
+    echo '</pre><br>';
+    return null;
+}

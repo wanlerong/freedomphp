@@ -55,7 +55,6 @@ class Router{
         });
         //匹配当前的路由信息
         $routeInfo = $dispatcher->dispatch($method, $uri);
-
         //如果没有匹配到
         if ($routeInfo[0] ==0 && trim($uri,'/') ) {
             $tmp             = explode('/', trim($uri, '/'));
