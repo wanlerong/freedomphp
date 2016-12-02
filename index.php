@@ -1,17 +1,9 @@
 <?php
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+/**
+ * Created by PhpStorm.
+ * User: wanlr
+ * Date: 2016/11/23
+ * Time: 11:41
+ */
 
-require_once './vendor/autoload.php';
-
-$loggerModel=new Logger('test');
-
-$log = new Logger('name');
-$log->pushHandler(new StreamHandler('/tmp/monolog.txt', Logger::WARNING));
-
-// add records to the log
-$log->addWarning('Foo',array('Freedom!'));
-$log->addError('Bar');
-
-
-?>
+echo "freedom!";
