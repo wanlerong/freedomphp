@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 if ( ! function_exists('action'))
 {
 	/**
-	 * Generate a URL to a library action.
+	 * Generate a URL to a controller action.
 	 *
 	 * @param  string  $name
 	 * @param  array   $parameters
@@ -625,7 +625,7 @@ if ( ! function_exists('link_to_route'))
 if ( ! function_exists('link_to_action'))
 {
 	/**
-	 * Generate a HTML link to a library action.
+	 * Generate a HTML link to a controller action.
 	 *
 	 * @param  string  $action
 	 * @param  string  $title
