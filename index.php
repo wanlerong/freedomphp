@@ -18,9 +18,9 @@ $autoloader->addPsr4("FreedomPHP\\Core\\", CORE_PATH);
 $autoloader->addPsr4("App\\", APP_PATH);
 
 /**
- * 加载常量配置
+ * 初始化配置
  */
-require_once APP_PATH.'config'.DIRECTORY_SEPARATOR.'constant.php';
+require_once APP_PATH.'config'.DIRECTORY_SEPARATOR.'init.php';
 
 /**
  * 加载公共方法
@@ -37,4 +37,6 @@ $app = new \FreedomPHP\Core\Application('App');
 $app->setRouter(
     Config::get(array('route'=>array('*')))
 );
+
+
 $app->run();

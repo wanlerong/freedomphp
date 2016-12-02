@@ -7,17 +7,28 @@
  */
 
 namespace App\Controller;
+use App\Model\UserModel;
 
-use FreedomPHP\Core\Controller;
-
-class IndexController extends Controller{
+class IndexController extends CommonController{
 
     public function index()
     {
-        echo 'this is index';
+        $data['info'] = 'freedom';
+
+        $user = UserModel::select('username')->find(1);
+        echo $user->username;
+
+        $user = UserModel::all();
+
+
+        $data['user'] = $user;
+
+        foreach ($data['user'] as $v){
+            p($v->username);
+        }
+
+        $this->display('index',$data);
     }
-
-
 
 }
 

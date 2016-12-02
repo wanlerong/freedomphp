@@ -13,7 +13,7 @@ function test(){
 
 function p($mixed = null) {
     echo '========<br><pre>';
-    var_dump($mixed);
+    print_r($mixed);
     echo '</pre><br>';
     return null;
 }
