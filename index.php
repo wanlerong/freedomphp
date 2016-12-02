@@ -38,6 +38,3 @@ $app->setRouter(
     Config::get(array('route'=>array('*')))
 );
 $app->run();
-
-
->>>>>>> 959fe7a90c148736e37453c76004f5316b9049c4
