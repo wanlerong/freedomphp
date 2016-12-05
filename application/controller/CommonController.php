@@ -18,14 +18,16 @@ class CommonController extends Controller{
     );
 
     protected $static_files                     = array(
-        'css'   =>  '',
-        'js'    =>  ''
+        'css'   =>  array('css/bootstrap.min.css'),
+        'js'    =>  array('js/jquery-1.7.min.js','js/bootstrap-modal.js','js/common.js')
     );
 
     public function __construct()
     {
         parent::__construct();
         //数据统计相关
+        $this->user_session = isset($_SESSION['user']) ? $_SESSION['user'] : array();;
+
         $this->setProperty('UserModel', function () {
             return new UserModel();
         });
@@ -43,10 +45,35 @@ class CommonController extends Controller{
             $this->view_data = array_merge($this->view_data, $data);
         }
         $this->view_data['static_files']        = $this->static_files;
+        $this->view_data['user_session']          = $this->user_session;
 
         $body_content                           = $this->view($view_tpl, $this->view_data, false);
 
         $this->view_data['body_content']        = $body_content;
         $this->view('iframe', $this->view_data);
+    }
+
+    /**
+     * 返回数据处理方法
+     *
+     * @param int $code
+     * @param null $msg
+     * @param null $data
+     */
+    public function ajaxReturn($code = AJ_RET_SUCC, $msg = null, $data = null)
+    {
+        //输出正确的json格式
+        header('Content-type:text/json');
+        $result["code"]         = $code;
+        $result["msg"]          = $msg;
+
+        if(empty($data['forward'])){//判断是否有跳转操作
+            $data['forward']    = '';
+        }
+
+        $result['data']         = $data;
+
+        echo json_encode($result);
+        exit;
     }
 }

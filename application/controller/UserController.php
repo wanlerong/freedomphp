@@ -7,29 +7,50 @@
  */
 namespace App\Controller;
 
+use App\Model\UserModel;
+use FreedomPHP\Core\Library\Input;
 use FreedomPHP\Core\Controller;
 
-class UserController extends Controller {
+class UserController extends CommonController{
 
-    public $username;
 
     public function __construct()
     {
-        echo "this is userController<br>";
-    }
-
-    public function aa(){
-        echo "<br>asdsad";
+        parent::__construct();
+        $this->static_files['js'][] = 'js/user.js';
     }
 
     public function index()
     {
-        echo 'hello index';
+        $data=array();
+        $this->display('user/index',$data);
     }
-    public function login(){
-        echo 'login';
-    }
-    public function reg(){
-        echo 'reg';
+
+    /**
+     * 用户注册
+     */
+    public function register(){
+        if (IS_POST){
+            $username = Input::post('username');
+            $password = Input::post('password');
+            $phone = Input::post('phone');
+
+            $up_data['username'] = $username;
+            $up_data['password'] = $password;
+            $up_data['phone'] = $phone;
+
+            $id = $this->UserModel->addinfo($up_data);
+            $this->ajaxReturn(AJ_RET_SUCC,'注册成功',array('forward'=>site_url('user','reg')));
+
+            $user_session = array(
+                'id'        =>  $id,
+                'username'  =>  $username,
+            );
+
+            $_SESSION['user'] = $user_session;
+        }
+
+        $data = array();
+        $this->display('user/register',$data);
     }
 }

@@ -9,6 +9,6 @@
 return array(
     ['ANY',    '/',            ['IndexController','index']],
     ['ANY',    '/index.php',   ['IndexController','index']],
-    ['ANY',    '/u/login',     ['UserController','login']],
-    ['ANY',    '/user/reg',    ['UserController', 'reg']],
+    ['ANY',    '/user/reg',     ['UserController','register']],
+    ['ANY',    '/user/index',     ['UserController','index']],
 );

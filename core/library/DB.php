@@ -181,9 +181,6 @@ class DB
             self::$instances[$key] = $obj->newInstanceArgs($args);
         }
 
-        echo 2;
-
-        p($args);p($model);p(self::$instances);
 
         return self::$instances[$key];
     }
@@ -196,7 +193,6 @@ class DB
      */
     public function __construct($config_callback_function = "get_db_config")
     {
-        echo 1;
 
         if ($config_callback_function) {
             $this->setConfigFunction($config_callback_function);
@@ -238,7 +234,7 @@ class DB
      *
      */
     public function setConfigFunction($callback_function)
-    {echo 3;
+    {
         if (!is_callable($callback_function)) {
             $this->setLastError("can not found callback function: $callback_function");
         }
@@ -266,7 +262,6 @@ class DB
      */
     public function load($const_table, $hash = null)
     {
-        echo 4;
         $this->logDebug("[T] Load($const_table, ".($hash ? $hash : 'null').")");
         if ($this->auto_close_mysql_link) {
             $this->close();
@@ -276,7 +271,6 @@ class DB
         if ($const_table && $this->config_callback_function) {
             $callback_function = $this->config_callback_function;
             if ($this->_config = call_user_func_array($callback_function, array($const_table, $hash))) {
-                p($this);
                 return $this;
             }
         }
@@ -318,7 +312,6 @@ class DB
      */
     protected function connect()
     {
-        echo 5;
 
         if (is_resource($this->connection)) {
             return $this->connection;
@@ -545,7 +538,7 @@ class DB
         $sth->execute($this->prepareBindings($bindings));
 
         if ($sth->errorCode() != '00000') {
-            $this->setLastError($sql.':'. json_encode($bindings) .':'.implode(',',$sth->errorInfo()), $sth->errorCode());
+            var_dump($sql.':'. json_encode($bindings) .':'.implode(',',$sth->errorInfo()), $sth->errorCode());
             return $result;
         }
         $tmp_time = microtime(1) - $tmp_time;
@@ -773,8 +766,6 @@ class DB
             die('builder table 不能为空');
         }
         $config = DataConfigLoader::parseTable($table);
-
-        p($table);
 
         return (new Builder(self::table($table, $hash)))->from($config['table']);
     }

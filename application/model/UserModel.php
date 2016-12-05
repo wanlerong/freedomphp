@@ -13,11 +13,7 @@ class UserModel extends CommonModel{
     public function __construct()
     {
         parent::__construct();
-        $this->builder = DB::builder('app.app_users');
-    }
-
-    public function test(){
-        echo 'test';
+        $this->builder = DB::builder('app.users');
     }
 
 }

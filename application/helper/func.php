@@ -6,14 +6,34 @@
  * Time: 下午11:17
  */
 
-function test(){
-    echo 'test';
-}
-
 
 function p($mixed = null) {
     echo '========<br><pre>';
     print_r($mixed);
     echo '</pre><br>';
     return null;
+}
+
+if (! function_exists('site_url')) {
+    /**
+     * 拼接链接地址
+     *
+     * @param $controller
+     * @param $action
+     * @param $params
+     * @return string
+     */
+    function site_url($controller = null, $action = null, $params = array())
+    {
+        $url_str = '';
+
+        $controller = $controller ? $controller : 'Index';
+        $action     = $action ? $action : 'index';
+
+        foreach ((array)$params as $k => $v) {
+            $url_str .= ($url_str ? '&' : '?').$k.'='.$v;
+        }
+
+        return BASE_URL . '/'.$controller.'/'.$action.$url_str;
+    }
 }

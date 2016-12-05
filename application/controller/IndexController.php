@@ -14,9 +14,6 @@ class IndexController extends CommonController{
     {
         $data['info'] = 'freedom';
 
-        $this->UserModel->test();
-
-        p($this->UserModel->builder->find(1));
 
         $this->display('index',$data);
     }

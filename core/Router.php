@@ -39,7 +39,6 @@ class Router{
                 $route[0] = ['GET','POST'];
             }
         }
-
         $dispatcher = \FastRoute\simpleDispatcher(function (RouteCollector $r) use ($routes) {
             //给控制器加上命名空间
             foreach ($routes as $row) {

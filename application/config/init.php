@@ -13,14 +13,16 @@ define('IS_POST',           REQUEST_METHOD =='POST' ? true : false);
  */
 define('VIEW_PATH',         APP_PATH . 'view'.DS);
 define('DOMAIN_URL',        'http://www.freedomphp.com');
+define('BASE_URL',        'http://www.freedomphp.com');
 
 /**
  * 静态文件目录
  */
-define('ASSETS_PATH',       APP_PATH . 'assets'.DS);
+define('CDN_PATH',       'http://ohpbsym8n.bkt.clouddn.com');
+define('ASSETS_PATH',       'http://www.freedomphp.com/assets/');
 define('CSS_PATH',          ASSETS_PATH . 'css' .DS);
 define('JS_PATH',           ASSETS_PATH . 'js' .DS);
-define('IMG_PATH',          ASSETS_PATH . 'images' .DS);
+define('IMG_PATH',          ASSETS_PATH . 'img' .DS);
 
 /**
  * ajax返回状态

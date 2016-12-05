@@ -84,7 +84,6 @@ class Builder
         $this->grammar    = new Grammar();
         $this->connection = $connection;
 
-        p($this->connection);
     }
 
     /**

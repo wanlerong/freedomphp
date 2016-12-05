@@ -16,4 +16,20 @@ class CommonModel extends Model
         parent::__construct();
     }
 
+    /**
+     * 添加数据
+     *
+     * @param $data
+     * @return int
+     */
+    public function addInfo($data){
+        if(empty($data) || !is_array($data)){
+            return false;
+        }
+
+        $this->builder->reset();
+
+        return $this->builder->insertGetId($data);
+    }
+
 }
