@@ -5,6 +5,7 @@
 // +----------------------------------------------------------------------
 namespace App\Controller;
 use FreedomPHP\Core\Controller;
+use FreedomPHP\Core\Library\Session;
 use App\Model\UserModel;
 
 class CommonController extends Controller{
@@ -18,7 +19,7 @@ class CommonController extends Controller{
     );
 
     protected $static_files                     = array(
-        'css'   =>  array('css/bootstrap.min.css'),
+        'css'   =>  array('css/bootstrap.min.css','css/common.css'),
         'js'    =>  array('js/jquery-1.7.min.js','js/bootstrap-modal.js','js/common.js')
     );
 
@@ -30,6 +31,10 @@ class CommonController extends Controller{
 
         $this->setProperty('UserModel', function () {
             return new UserModel();
+        });
+
+        $this->setProperty('Session',function (){
+            return new Session();
         });
     }
 

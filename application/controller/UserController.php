@@ -9,7 +9,6 @@ namespace App\Controller;
 
 use App\Model\UserModel;
 use FreedomPHP\Core\Library\Input;
-use FreedomPHP\Core\Controller;
 
 class UserController extends CommonController{
 
@@ -23,6 +22,7 @@ class UserController extends CommonController{
     public function index()
     {
         $data=array();
+        $data['session'] = $this->Session->userdata();
         $this->display('user/index',$data);
     }
 
@@ -33,24 +33,40 @@ class UserController extends CommonController{
         if (IS_POST){
             $username = Input::post('username');
             $password = Input::post('password');
-            $phone = Input::post('phone');
+            $email = Input::post('email');
 
             $up_data['username'] = $username;
-            $up_data['password'] = $password;
-            $up_data['phone'] = $phone;
+            $up_data['password'] = my_md5($password);
+            $up_data['email'] = $email;
 
-            $id = $this->UserModel->addinfo($up_data);
-            $this->ajaxReturn(AJ_RET_SUCC,'注册成功',array('forward'=>site_url('user','reg')));
+            if ($id=$this->UserModel->addinfo($up_data)){
+                $user_session = array(
+                    'id'        =>  $id,
+                    'username'  =>  $username,
+                    'email'     =>  $email,
+                );
 
-            $user_session = array(
-                'id'        =>  $id,
-                'username'  =>  $username,
-            );
+                $this->Session->set_userdata($user_session);
+            }
+            $this->ajaxReturn(AJ_RET_SUCC,'注册成功',array('forward'=>site_url('user','index')));
 
-            $_SESSION['user'] = $user_session;
+
+
         }
 
         $data = array();
         $this->display('user/register',$data);
+    }
+
+    /**
+     * 用户登录
+     */
+    public function login(){
+        if (IS_POST){
+            $email = Input::post('email');
+            $password = Input::post('password');
+
+
+        }
     }
 }

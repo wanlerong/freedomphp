@@ -12,11 +12,18 @@ $(function () {
     $('#user_register_btn').formTodo({
         callback:function(url, method, data){
             if(data.username.isEmpty()){
-                alert('登录账号不能为空');return false;
+                $('#username').addClass('error');$('#user_name').parent().addClass('error');
+                return false;
+            }
+
+            if(data.email.isEmpty()){
+                $('#email').addClass('error');$('#email').parent().addClass('error');
+                return false;
             }
 
             if(data.password.isEmpty()){
-                alert('登录密码不能为空');return false;
+                $('#password').addClass('error');$('#password').parent().addClass('error');
+                return false;
             }
 
             return true;

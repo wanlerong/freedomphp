@@ -37,3 +37,14 @@ if (! function_exists('site_url')) {
         return BASE_URL . '/'.$controller.'/'.$action.$url_str;
     }
 }
+
+if (! function_exists('my_md5')) {
+    /**
+     * md5加密
+     * @param $password
+     * @return string
+     */
+    function my_md5($password){
+        return md5($password.'baef13vg&^*a4dw');
+    }
+}

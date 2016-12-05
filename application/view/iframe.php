@@ -7,24 +7,27 @@
 <?php foreach ($static_files['css'] as $v): ?>
     <link rel="stylesheet" href="<?php echo ASSETS_PATH.$v;?>"/>
 <?php endforeach;?>
-  <style>body{padding-top: 60px;}</style>
 </head>
 <body>
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="container-fluid">
-      <a class="brand" href="#">Notehubs</a>
-      <ul class="nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <p class="pull-right">Logged in as <a href="#">username</a></p>
+<div class="container canvas">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container canvas">
+        <a class="brand" href="#">Notehubs</a>
+        <ul class="nav">
+        </ul>
+        <form action="" class="pull-right">
+          <input class="input-small" type="text" placeholder="Email">
+          <input class="input-small" type="password" placeholder="Password">
+          <button class="btn" type="submit">登录</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
 <?php echo $body_content;?>
+
+</div>
 </body>
 <?php foreach ($static_files['js'] as $v): ?>
     <script src="<?php echo ASSETS_PATH.$v;?>"></script>
