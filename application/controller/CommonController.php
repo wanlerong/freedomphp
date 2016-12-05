@@ -5,6 +5,7 @@
 // +----------------------------------------------------------------------
 namespace App\Controller;
 use FreedomPHP\Core\Controller;
+use App\Model\UserModel;
 
 class CommonController extends Controller{
 
@@ -21,6 +22,14 @@ class CommonController extends Controller{
         'js'    =>  ''
     );
 
+    public function __construct()
+    {
+        parent::__construct();
+        //数据统计相关
+        $this->setProperty('UserModel', function () {
+            return new UserModel();
+        });
+    }
 
     /**
      * 渲染模板

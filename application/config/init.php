@@ -32,20 +32,3 @@ define('AJ_RET_NOLOGIN',    900);
 
 
 define('PAGE_LIST',          10);
-
-/**
- * 启用Eloquent
- */
-use Illuminate\Container\Container;
-use Illuminate\Database\Capsule\Manager as DB;
-
-$capsule = new DB;
-
-// 创建链接
-$capsule->addConnection((array) \FreedomPHP\Core\Library\Config::get(array('database'=>array('*')))['users']);
-
-// 设置全局静态可访问
-$capsule->setAsGlobal();
-
-// 启动Eloquent
-$capsule->bootEloquent();

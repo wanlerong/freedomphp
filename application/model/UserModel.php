@@ -6,10 +6,18 @@
 
 namespace App\Model;
 
-use FreedomPHP\Core\BaseModel;
+use FreedomPHP\Core\Library\DB;
 
-class UserModel extends BaseModel{
+class UserModel extends CommonModel{
 
-    protected $table = 'users';
+    public function __construct()
+    {
+        parent::__construct();
+        $this->builder = DB::builder('app.app_users');
+    }
+
+    public function test(){
+        echo 'test';
+    }
 
 }

@@ -11,7 +11,7 @@ namespace FreedomPHP\Core\Library;
 class Config{
     public static function loadFile($filename)
     {
-        return include_once APP_PATH."/Config/".$filename.".php";
+        return include_once APP_PATH."/config/".$filename.".php";
     }
     /**
      * @param $key

@@ -7,7 +7,6 @@
  */
 
 namespace App\Controller;
-use App\Model\UserModel;
 
 class IndexController extends CommonController{
 
@@ -15,17 +14,9 @@ class IndexController extends CommonController{
     {
         $data['info'] = 'freedom';
 
-        $user = UserModel::select('username')->find(1);
-        echo $user->username;
+        $this->UserModel->test();
 
-        $user = UserModel::all();
-
-
-        $data['user'] = $user;
-
-        foreach ($data['user'] as $v){
-            p($v->username);
-        }
+        p($this->UserModel->builder->find(1));
 
         $this->display('index',$data);
     }
