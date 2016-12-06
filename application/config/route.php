@@ -16,4 +16,6 @@ return array(
      * 用户模块
      */
     ['ANY',    '/user/reg',    ['UserController','register']],
+    ['ANY',    '/user/check',    ['UserController','check']],
+    ['ANY',    '/user/test',    ['UserController','test']],
 );

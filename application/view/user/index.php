@@ -14,6 +14,7 @@
               <p>拒绝信息爆炸，享受优质知识。大量工程师使用Notehubs来打造个人的终身资料库，获取更优质的信息，总结整理思绪, 并且一起维护更好的技术知识</p>
             </div>
             <div class="col-md-4 col-sm-offset-1">
+                <!--form必须有id,action,medthod-->
                 <form id="user_register_form" class="form-horizontal" role="form" action="<?php echo site_url('user','reg');?>" method="post">
                     <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
@@ -35,7 +36,8 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="button" id="user_register_btn" class="btn btn-block btn-primary btn-lg">注册 Notehubs</button>
+                        <!--submit_btn样式防多次提交-->
+                      <button type="button" id="user_register_btn" class="btn btn-block btn-primary btn-lg submit_btn">注册 Notehubs</button>
                     </div>
                   </div>
                 </form>
