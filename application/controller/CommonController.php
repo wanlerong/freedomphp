@@ -19,8 +19,8 @@ class CommonController extends Controller{
     );
 
     protected $static_files                     = array(
-        'css'   =>  array('css/bootstrap.min.css','css/common.css'),
-        'js'    =>  array('js/jquery-1.7.min.js','js/bootstrap-modal.js','js/common.js')
+        'css'   =>  array('css/bootstrap.min.css','css/common.css','css/bootstrapValidator.css'),
+        'js'    =>  array('js/jquery.min.js','js/bootstrap.min.js','js/bootstrapValidator.js','js/common.js')
     );
 
     public function __construct()

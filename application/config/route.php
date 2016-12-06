@@ -7,8 +7,13 @@
  */
 
 return array(
-    ['ANY',    '/',            ['IndexController','index']],
-    ['ANY',    '/index.php',   ['IndexController','index']],
-    ['ANY',    '/user/reg',     ['UserController','register']],
-    ['ANY',    '/user/index',     ['UserController','index']],
+    /**
+     * 首页
+     */
+    ['ANY',    '/',            ['UserController','index']],
+    ['ANY',    '/index.php',   ['UserController','index']],
+    /**
+     * 用户模块
+     */
+    ['ANY',    '/user/reg',    ['UserController','register']],
 );

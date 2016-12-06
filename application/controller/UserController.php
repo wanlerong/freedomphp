@@ -19,6 +19,9 @@ class UserController extends CommonController{
         $this->static_files['js'][] = 'js/user.js';
     }
 
+    /**
+     * 首页
+     */
     public function index()
     {
         $data=array();
