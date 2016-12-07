@@ -12,8 +12,7 @@ class IndexController extends CommonController{
 
     public function index()
     {
-        $data['info'] = 'freedom';
-
+        $data=array();
 
         $this->display('index',$data);
     }

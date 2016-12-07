@@ -31,6 +31,7 @@ class Email
         $fromname = !empty($fromname) ? $fromname : self::$_conf[$this->_channel]['fromname'];
         $return   = false;
         $ch=curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);    //由于没有配置信任的服务器HTTPS验证。默认，cURL被设为不信任任何CAs，就是说，它不信任任何服务器验证。因此，这就是浏览器无法通过HTTPs访问你服务器的原因。使用curl_exec()之前跳过ssl检查项。
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
@@ -49,7 +50,7 @@ class Email
 
         if( $result === false ) //请求失败
         {
-            //echo 'last error : '.curl_error($ch);
+            return 'last error : '.curl_error($ch);
         }
         else
         {

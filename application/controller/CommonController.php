@@ -40,11 +40,11 @@ class CommonController extends Controller{
 
     /**
      * 渲染模板
-     *
      * @param bool $view_tpl
      * @param array $data
+     * @param string $iframe
      */
-    protected function display($view_tpl = false, $data = array())
+    protected function display($view_tpl = false, $data = array(),$iframe='iframe')
     {
         if ($data) {
             $this->view_data = array_merge($this->view_data, $data);
@@ -55,7 +55,7 @@ class CommonController extends Controller{
         $body_content                           = $this->view($view_tpl, $this->view_data, false);
 
         $this->view_data['body_content']        = $body_content;
-        $this->view('iframe', $this->view_data);
+        $this->view($iframe, $this->view_data);
     }
 
     /**

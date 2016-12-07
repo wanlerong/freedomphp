@@ -3,9 +3,19 @@ namespace FreedomPHP\Core\Library;
 
 class Session{
 
+    //是否登录
+    public $islogin;
+
     public function __construct()
     {
         session_start();
+
+        if ($this->userdata('username') && $this->userdata('id')){
+            $this->islogin = true;
+        }else{
+            $this->islogin = false;
+        }
+
     }
 
     public function userdata($key = NULL)
@@ -65,8 +75,14 @@ class Session{
      * @param	mixed	$key	Session data key(s)
      * @return	void
      */
-    public function unset_userdata($key)
+    public function unset_userdata($key=null)
     {
+        if (empty($key)){
+            session_destroy();
+
+            return;
+        }
+
         if (is_array($key))
         {
             foreach ($key as $k)

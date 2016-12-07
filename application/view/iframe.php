@@ -21,17 +21,35 @@
       </button>
       <a class="navbar-brand project-name" href="#">Notehubs</a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <form class="navbar-form navbar-right" role="form">
-        <div class="form-group">
-          <input type="text" placeholder="邮箱" class="form-control">
-        </div>
-        <div class="form-group">
-          <input type="password" placeholder="密码" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary">登录</button>
-      </form>
-    </div><!--/.navbar-collapse -->
+
+    <div id="navbar" class="navbar-collapse collapse pull-right">
+      <ul class="nav navbar-nav">
+        <li>
+          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="搜索" class="form-control">
+            </div>
+          </form>
+        </li>
+        <?php if (isset($session)&&$session['id']&&$session['username']): ?>
+        <li class="dropdown user-dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span style="color: #fff" class="glyphicon glyphicon-user"></span><span style="color: #fff" class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-header">以<?php echo $session['username'];?>用户登录</li>
+            <li class="divider"></li>
+            <li><a href="#">个人中心</a></li>
+            <li class="divider"></li>
+            <li><a href="/user/logout">退出登录</a></li>
+          </ul>
+        </li>
+        <?php else: ?>
+        <li><a href="<?php echo site_url('user','login');?>" type="submit" class="btn btn-primary user-login-btn">登录</a></li>
+        <?php endif; ?>
+      </ul>
+    </div><!--/.nav-collapse -->
+
   </div>
 </nav>
 
@@ -41,9 +59,5 @@
     <script src="<?php echo ASSETS_PATH.$v;?>"></script>
 <?php endforeach; ?>
 </html>
-
-
-
-
 
 

@@ -18,7 +18,7 @@
                 <form id="user_register_form" class="form-horizontal" role="form" action="<?php echo site_url('user','reg');?>" method="post">
                     <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <input type="text" name="username" id="username" class="form-control" id="inputEmail3" placeholder="请输入昵称">
+                      <input type="text" name="username" id="username" class="form-control" id="inputEmail2" placeholder="请输入昵称">
                       <span class="glyphicon"></span>
                     </div>
                   </div>

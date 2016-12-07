@@ -18,6 +18,7 @@ class UserController extends CommonController{
     {
         parent::__construct();
         $this->static_files['js'][] = 'js/user.js';
+        $this->static_files['css'][] = 'css/user.css';
     }
 
     /**
@@ -26,8 +27,15 @@ class UserController extends CommonController{
     public function index()
     {
         $data=array();
-        $data['session'] = $this->Session->userdata();
-        $this->display('user/index',$data);
+        //如果已登录
+        if ($this->Session->islogin){
+
+            $data['session'] = $this->Session->userdata();
+            $this->display('index/index',$data);
+        }else{//如果未登录
+
+            $this->display('user/index',$data);
+        }
     }
 
     /**
@@ -47,12 +55,6 @@ class UserController extends CommonController{
 
 
             if ($id=$this->UserModel->addinfo($add_data)){
-                $user_session = array(
-                    'id'        =>  $id,
-                    'username'  =>  $username,
-                    'email'     =>  $email,
-                );
-
                 //发送验证邮件
                 $emailer = new Email();
                 $to[] = $email;
@@ -63,10 +65,9 @@ class UserController extends CommonController{
 {$url}
 EOF;
                 $emailer->send($to,$title,$content);
-
-                $this->Session->set_userdata($user_session);
             }
-            $this->ajaxReturn(AJ_RET_SUCC,'注册成功',array('forward'=>site_url('user','index')));
+
+            $this->ajaxReturn(AJ_RET_SUCC,'注册成功',array('forward'=>site_url('user','login')));
         }
 
         $data = array();
@@ -80,7 +81,28 @@ EOF;
         if (IS_POST){
             $email = Input::post('email');
             $password = Input::post('password');
+
+            $data = $this->UserModel->builder->where(array('email'=>$email))->first();
+            if (empty($data)){
+                $this->ajaxReturn(AJ_RET_FAIL,'邮箱不存在,请先注册',array('forward'=>'stop'));
+            }elseif ($data['status']==0) {
+                $this->ajaxReturn(AJ_RET_FAIL,'您的账号还没有完成邮箱验证',array('forward'=>'stop'));
+            }elseif ($data['password']!=my_md5($password)){
+                $this->ajaxReturn(AJ_RET_FAIL,'用户名或密码错误',array('forward'=>'stop'));
+            }else{
+                //设置session
+                $user_session = array(
+                    'id'        =>  $data['id'],
+                    'username'  =>  $data['username'],
+                    'email'     =>  $data['email'],
+                );
+                $this->Session->set_userdata($user_session);
+                $this->ajaxReturn(AJ_RET_SUCC,'登录成功',array('forward'=>site_url('user','index')));
+            }
         }
+
+        $data=array();
+        $this->display('user/login',$data,'login_iframe');
     }
 
     /**
@@ -96,15 +118,64 @@ EOF;
             $up_data['status'] = 1;
             $up_data['id'] = $data['id'];
             $this->UserModel->builder->update($up_data);
+            alert('验证成功,请前往登录',site_url('user','login'));
+        }else{
+            die('非法访问');
         }
-        //重定向浏览器 wlr:notice这里可以封装一个redirect方法
-        header("Location: ".BASE_URL."/user/index");
+    }
+
+    /**
+     * ajax判断用户名是否存在
+     */
+    public function is_unique_username(){
+        $username = Input::post('username');
+        $data = $this->UserModel->builder->where(array('username'=>$username))->first();
+        if (empty($data)){
+            $valid = true;
+        }else{
+            $valid = false;
+        }
+        echo json_encode(array(
+            'valid' => $valid,
+        ));
         exit;
+    }
+
+    /**
+     * ajax判断邮箱是否存在
+     */
+    public function is_unique_email(){
+        $email = Input::post('email');
+        $data = $this->UserModel->builder->where(array('email'=>$email))->first();
+        if (empty($data)){
+            $valid = true;
+        }else{
+            $valid = false;
+        }
+        echo json_encode(array(
+            'valid' => $valid,
+        ));
+        exit;
+    }
+
+    /**
+     * 退出登录
+     */
+    public function logout(){
+        $this->Session->unset_userdata();
+        redirect(site_url('user','index'));
     }
 
     /**
      * 测试
      */
     public function test(){
+        $data = array();
+        if (IS_POST){
+            $a = Input::post('a');
+            echo $a;
+        }
+        $this->display('test',$data);
+
     }
 }
