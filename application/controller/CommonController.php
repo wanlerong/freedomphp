@@ -6,9 +6,13 @@
 namespace App\Controller;
 use FreedomPHP\Core\Controller;
 use FreedomPHP\Core\Library\Session;
+use FreedomPHP\Core\Library\Input;
 use App\Model\UserModel;
+use App\Model\NotehubModel;
 
 class CommonController extends Controller{
+
+    public $session;
 
     protected $view_data                        = array(
         'seo'   => array(
@@ -26,16 +30,24 @@ class CommonController extends Controller{
     public function __construct()
     {
         parent::__construct();
-        //数据统计相关
-        $this->user_session = isset($_SESSION['user']) ? $_SESSION['user'] : array();;
 
         $this->setProperty('UserModel', function () {
             return new UserModel();
         });
 
+        $this->setProperty('NotehubModel', function () {
+            return new NotehubModel();
+        });
+
         $this->setProperty('Session',function (){
             return new Session();
         });
+
+        $this->setProperty('Input',function (){
+            return new Input();
+        });
+
+        $this->session = $this->Session->userdata();
     }
 
     /**
@@ -46,11 +58,13 @@ class CommonController extends Controller{
      */
     protected function display($view_tpl = false, $data = array(),$iframe='iframe')
     {
+        header("Content-type: text/html; charset:utf-8");
+
         if ($data) {
             $this->view_data = array_merge($this->view_data, $data);
         }
         $this->view_data['static_files']        = $this->static_files;
-        $this->view_data['user_session']          = $this->user_session;
+        $this->view_data['session']          = $this->session;
 
         $body_content                           = $this->view($view_tpl, $this->view_data, false);
 

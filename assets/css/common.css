@@ -3,3 +3,6 @@ body{padding-top: 48px;}
 .fb1{background: #627aad;}
 .project-name{color: #fff;}
 .project-name:hover{color: #fff;}
+.navbar-nav>li.user-dropdown{}
+.navbar-nav>li.user-dropdown a.dropdown-toggle:hover,.navbar-nav>li.user-dropdown a.dropdown-toggle:active,.navbar-nav>li.user-dropdown a.dropdown-toggle:visited{background: #627aad;}
+.navbar-nav>li a.user-login-btn{height: 34px;margin: 8px 0px 0px 6px;line-height: 0px;}.navbar-nav>li a.user-login-btn:hover{background:#428bca;}

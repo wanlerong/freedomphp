@@ -2,7 +2,6 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <title><?php echo $seo['title']?></title>
 <?php foreach ($static_files['css'] as $v): ?>
@@ -19,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand project-name" href="#">Notehubs</a>
+      <a class="navbar-brand project-name" href="/">Notehubs</a>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse pull-right">
@@ -39,13 +38,14 @@
           <ul class="dropdown-menu" role="menu">
             <li class="dropdown-header">以<?php echo $session['username'];?>用户登录</li>
             <li class="divider"></li>
+            <li><a href="/addnote">创建Notehub</a></li>
             <li><a href="#">个人中心</a></li>
             <li class="divider"></li>
             <li><a href="/user/logout">退出登录</a></li>
           </ul>
         </li>
         <?php else: ?>
-        <li><a href="<?php echo site_url('user','login');?>" type="submit" class="btn btn-primary user-login-btn">登录</a></li>
+        <li><a href="/login" type="submit" class="btn btn-primary user-login-btn">登录</a></li>
         <?php endif; ?>
       </ul>
     </div><!--/.nav-collapse -->

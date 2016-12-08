@@ -1,5 +1,5 @@
 <div class="container">
-  <form id="login_form" class="form-signin" role="form" action="<?php echo site_url('user','login')?>" method="post">
+  <form id="login_form" class="form-signin" role="form" action="/login" method="post">
     <h2 class="form-signin-heading">登录Notehubs</h2>
 
       <div class="form-group">

@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-4 col-sm-offset-1">
                 <!--form必须有id,action,medthod-->
-                <form id="user_register_form" class="form-horizontal" role="form" action="<?php echo site_url('user','reg');?>" method="post">
+                <form id="user_register_form" class="form-horizontal" role="form" action="/reg" method="post">
                     <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <input type="text" name="username" id="username" class="form-control" id="inputEmail2" placeholder="请输入昵称">
@@ -37,7 +37,7 @@
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <!--submit_btn样式防多次提交-->
-                      <button type="button" id="user_register_btn" class="btn btn-block btn-primary btn-lg submit_btn">注册 Notehubs</button>
+                      <button type="button" id="user_register_btn" autocomplete="off" data-loading-text="Loading..." class="btn btn-block btn-primary btn-lg submit_btn">注册 Notehubs</button>
                     </div>
                   </div>
                 </form>

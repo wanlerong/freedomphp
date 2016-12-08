@@ -20,6 +20,7 @@
     "nikic/fast-route": "^0.6.0",
     "rodneyrehm/plist": "~2.0.1",
     "illuminate/database":"4.2.2",
-    "webmozart/assert": "^1.2"
+    "webmozart/assert": "^1.2",
+    "ezyang/htmlpurifier": "^4.8"
   }
 }

@@ -144,7 +144,7 @@
      */
     ajaxError:function(xhr, ajaxOptions, thrownError){
         //阻塞结束,释放disabled
-        $('.submit_btn').removeAttr('disabled');
+        $('.submit_btn').button('reset');
         alert("Http status: " + xhr.status + " " + xhr.statusText + "\najaxOptions: " + ajaxOptions + "\nthrownError:"+thrownError + "\n" +xhr.responseText);
     },
     /**
@@ -154,7 +154,7 @@
      */
     ajaxDone:function(json){
         //阻塞结束,释放disabled
-        $('.submit_btn').removeAttr('disabled');
+        $('.submit_btn').button('reset');
         $.xy.debug(json);
         if(json[$.xy.keys.code] == $.xy.statusCode.failed) {
             alert('提示：'+json[$.xy.keys.msg]);
@@ -590,8 +590,9 @@
                         $.xy.debug(url);
                         $.xy.debug(method);
                         $.xy.debug(data);
+
                         //防止表单重复提交
-                        $('.submit_btn').attr('disabled','disabled');
+                        $('.submit_btn').button('loading');
                         $.xy.request(url, data, method, null, null,null,
                             submitCallback,
                             $.xy.ajaxError

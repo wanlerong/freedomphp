@@ -9,6 +9,7 @@
 // +----------------------------------------------------------------------
 
 $(function () {
+    //防止表单重复提交
     $('#user_register_btn').formTodo({
         callback:function(url, method, data){
             //手动验证表单bootstrapValidator方法
@@ -62,7 +63,7 @@ $(function () {
                         message: '昵称必须由字母数字，下划线，小数点组成'
                     },
                     remote:{
-                        url: '/user/ckusername',     //后台处理程序
+                        url: '/ckusername',     //后台处理程序
                         type: "post",               //数据发送方式
                         dataType: "json",           //接受数据格式
                         data: {                     //要传递的数据
@@ -83,7 +84,7 @@ $(function () {
                         message: '无效的邮件地址'
                     },
                     remote:{
-                        url: '/user/ckemail',     //后台处理程序
+                        url: '/ckemail',     //后台处理程序
                         type: "post",               //数据发送方式
                         dataType: "json",           //接受数据格式
                         data: {                     //要传递的数据

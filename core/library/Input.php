@@ -7,10 +7,22 @@
  */
 
 namespace FreedomPHP\Core\Library;
+use Monolog\Handler\NullHandler;
 use Webmozart\Assert\Assert;
+
 
 class Input
 {
+    public $purifier;
+
+    public function __construct()
+    {
+        require_once '/vendor/ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
+        //如果第三方类没有设置命名空间，PHP默认会加上一个顶级命名空间'\'的
+        $config = \HTMLPurifier_Config::createDefault();
+        $this->purifier = new \HTMLPurifier($config);
+    }
+
     /**
      * Fetch an item from the GET array
      *
@@ -18,9 +30,9 @@ class Input
      * @param	bool	$xss_clean	Whether to apply XSS filtering
      * @return	mixed
      */
-    public static function get($index = NULL)
+    public function get($index = NULL)
     {
-        return self::_fetch_from_array($_GET, $index);
+        return $this->_fetch_from_array($_GET, $index);
     }
 
     /**
@@ -30,9 +42,9 @@ class Input
      * @param	bool	$xss_clean	Whether to apply XSS filtering
      * @return	mixed
      */
-    public static function post($index = NULL)
+    public function post($index = NULL)
     {
-        return self::_fetch_from_array($_POST, $index);
+        return $this->_fetch_from_array($_POST, $index);
     }
 
     /**
@@ -40,12 +52,13 @@ class Input
      *
      * Internal method used to retrieve values from global arrays.
      *
-     * @param	array	&$array		$_GET, $_POST, $_COOKIE, $_SERVER, etc.
-     * @param	mixed	$index		Index for item to be fetched from $array
-     * @param	bool	$xss_clean	Whether to apply XSS filtering
-     * @return	mixed
+     * @param    array &$array $_GET, $_POST, $_COOKIE, $_SERVER, etc.
+     * @param    mixed $index Index for item to be fetched from $array
+     * @param $fliter 过滤函数
+     * @return mixed
+     * @internal param bool $xss_clean Whether to apply XSS filtering
      */
-    public static function _fetch_from_array(&$array, $index = NULL)
+    public function _fetch_from_array(&$array, $index = NULL)
     {
         // If $index is NULL, it means that the whole $array is requested
         isset($index) OR $index = array_keys($array);
@@ -56,14 +69,14 @@ class Input
             $output = array();
             foreach ($index as $key)
             {
-                $output[$key] = self::_fetch_from_array($array, $key);
+                $output[$key] = $this->_fetch_from_array($array, $key);
             }
 
             return $output;
         }
         if (isset($array[$index]))
         {
-            $value = $array[$index];
+            $value = $this->Fliter($array[$index]);
         }
         else
         {
@@ -71,4 +84,21 @@ class Input
         }
         return $value;
     }
+
+    /**
+     * 过滤方法
+     * @param $dirty_html
+     * @param $off_html 是否将html代码转化成实体
+     * @return mixed
+     */
+    public function Fliter($dirty_html,$off_html=true){
+        $clean_html = $this->purifier->purify($dirty_html);
+        if ($off_html){
+            $clean_html = htmlspecialchars($clean_html);
+        }
+        return $clean_html;
+    }
 }
+
+
+

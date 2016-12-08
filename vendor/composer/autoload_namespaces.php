@@ -12,5 +12,6 @@ return array(
     'Illuminate\\Events' => array($vendorDir . '/illuminate/events'),
     'Illuminate\\Database' => array($vendorDir . '/illuminate/database'),
     'Illuminate\\Container' => array($vendorDir . '/illuminate/container'),
+    'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'CFPropertyList' => array($vendorDir . '/rodneyrehm/plist/classes'),
 );

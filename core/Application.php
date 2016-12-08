@@ -37,12 +37,20 @@ class Application
     protected $default_method = null;
 
     /**
+     * 接收值
+     * @var Input
+     */
+    protected $input;
+
+    /**
      * Application constructor.
      * @param string $namespace
      * @param string $route
      */
     public function __construct($namespace = '', $route = '')
     {
+        $this->input = new Input();
+
         if ($namespace) {
             $this->setNamespace($namespace);
         }
@@ -102,8 +110,8 @@ class Application
     private function getRouteInfo()
     {
         if (!$this->router) {
-            $controller = ucfirst(Input::get('c'));
-            $method     = Input::get('a');
+            $controller = ucfirst($this->input->get('c'));
+            $method     = $this->input->get('a');
 
             if (!$controller) {
                 $controller = $this->default_controller;

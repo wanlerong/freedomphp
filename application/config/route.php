@@ -15,10 +15,20 @@ return array(
     /**
      * 用户模块
      */
-    ['ANY',    '/user/reg',         ['UserController','register']],
-    ['ANY',    '/user/check',       ['UserController','check']],
-    ['ANY',    '/user/login',       ['UserController','login']],
-    ['POST',   '/user/ckusername',  ['UserController','is_unique_username']], //ajax判断用户名是否存在
-    ['POST',   '/user/ckemail',     ['UserController','is_unique_email']], //ajax判断邮箱是否存在
-    ['ANY',    '/user/test',        ['UserController','test']],
+    ['ANY',    '/reg',              ['UserController','register']],
+    ['ANY',    '/check',            ['UserController','check']],
+    ['ANY',    '/login',            ['UserController','login']],
+    ['POST',   '/ckusername',       ['UserController','is_unique_username']], //ajax判断用户名是否存在
+    ['POST',   '/ckemail',          ['UserController','is_unique_email']], //ajax判断邮箱是否存在
+    /**
+     * 开发测试
+     */
+    ['ANY',    '/test',             ['UserController','test']],
+    /**
+     * Notehub模块
+     */
+    ['ANY',    '/addnote',          ['NotehubController','add']],
+
+
+
 );
