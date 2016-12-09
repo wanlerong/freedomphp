@@ -14,7 +14,33 @@
               <p>拒绝信息爆炸，享受优质知识。大量工程师使用Notehubs来打造个人的终身资料库，获取更优质的信息，总结整理思绪, 并且一起维护更好的技术知识</p>
             </div>
             <div class="col-md-4 col-sm-offset-1">
-                <div>欢迎你<?php echo $session['username'];?></div>
+                <!--form必须有id,action,medthod-->
+                <form id="user_register_form" class="form-horizontal" role="form" action="/reg" method="post">
+                    <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <input type="text" name="username" id="username" class="form-control" id="inputEmail2" placeholder="请输入昵称">
+                      <span class="glyphicon"></span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <input type="email" name="email" id="email" class="form-control" id="inputEmail3" placeholder="请输入邮箱">
+                      <span class="glyphicon"></span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <input type="password" name="password" id="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+                      <span class="glyphicon"></span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <!--submit_btn样式防多次提交-->
+                      <button type="button" id="user_register_btn" autocomplete="off" data-loading-text="Loading..." class="btn btn-block btn-primary btn-lg submit_btn">注册 Notehubs</button>
+                    </div>
+                  </div>
+                </form>
             </div>
         </div>
     </div>

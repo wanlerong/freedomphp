@@ -27,11 +27,20 @@ class UserController extends CommonController{
         $data=array();
         //如果已登录
         if ($this->Session->islogin){
+            $data['my_notes'] = $this->NotehubModel->builder->where(array('user_id'=>$this->session['id']))->get();
 
-            $this->display('index/index',$data);
-        }else{//如果未登录
+            foreach ($data['my_notes'] as $k=>$v){
+                if ($v['is_public'] == 0){
+                    $data['my_private_notes'][] = $v;
+                }else{
+                    $data['my_public_notes'][] = $v;
+                }
+            }
 
             $this->display('user/index',$data);
+        }else{//如果未登录
+
+            $this->display('index/index',$data);
         }
     }
 

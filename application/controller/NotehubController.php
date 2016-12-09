@@ -38,7 +38,7 @@ class NotehubController extends CommonController
 
 
             if ($id = $this->NotehubModel->addInfo($data)){
-                $this->ajaxReturn(AJ_RET_SUCC,'创建成功',array('forward'=>'stop'));
+                $this->ajaxReturn(AJ_RET_SUCC,'创建成功',array('forward'=>BASE_URL));
             }else{
                 $this->ajaxReturn(AJ_RET_FAIL,'创建失败',array('forward'=>BASE_URL.'/addnote'));
             }

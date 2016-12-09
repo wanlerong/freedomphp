@@ -30,7 +30,7 @@
             </div>
           </form>
         </li>
-        <?php if (isset($session)&&$session['id']&&$session['username']): ?>
+        <?php if (!empty($session)&&$session['id']&&$session['username']): ?>
         <li class="dropdown user-dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <span style="color: #fff" class="glyphicon glyphicon-user"></span><span style="color: #fff" class="caret"></span>
