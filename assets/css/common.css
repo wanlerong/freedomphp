@@ -9,7 +9,12 @@ body{padding-top: 48px;}
 
 .text-small { font-size: 12px !important; }
 .text-gray { color: #767676 !important; }
+.text-lalign{text-align: left;}
+
+.martop20{margin-top: 20px;}
+.marleft10{margin-left: 10px;}
 
 .navbar-nav>li.user-dropdown{}
 .navbar-nav>li.user-dropdown a.dropdown-toggle:hover,.navbar-nav>li.user-dropdown a.dropdown-toggle:active,.navbar-nav>li.user-dropdown a.dropdown-toggle:visited{background: #627aad;}
 .navbar-nav>li a.user-login-btn{height: 34px;margin: 8px 0px 0px 6px;line-height: 0px;}.navbar-nav>li a.user-login-btn:hover{background:#428bca;}
+

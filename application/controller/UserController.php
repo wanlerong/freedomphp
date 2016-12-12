@@ -28,6 +28,8 @@ class UserController extends CommonController{
         //如果已登录
         if ($this->Session->islogin){
             $data['my_notes'] = $this->NotehubModel->builder->where(array('user_id'=>$this->session['id']))->get();
+            $data['my_private_notes'] = array();
+            $data['my_public_notes'] = array();
 
             foreach ($data['my_notes'] as $k=>$v){
                 if ($v['is_public'] == 0){

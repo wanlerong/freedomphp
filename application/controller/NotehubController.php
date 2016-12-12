@@ -48,4 +48,13 @@ class NotehubController extends CommonController
         $data = array();
         $this->display('notehub/add',$data);
     }
+
+    /**
+     * notehub管理页面
+     */
+    public function admin(){
+        $data = array();
+
+        $this->display('notehub/admin',$data);
+    }
 }

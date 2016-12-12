@@ -17,7 +17,7 @@ class Input
 
     public function __construct()
     {
-        require_once '/vendor/ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
+        require_once VENDOR_PATH.'ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
         //如果第三方类没有设置命名空间，PHP默认会加上一个顶级命名空间'\'的
         $config = \HTMLPurifier_Config::createDefault();
         $this->purifier = new \HTMLPurifier($config);

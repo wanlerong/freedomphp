@@ -28,6 +28,7 @@ return array(
      * Notehub模块
      */
     ['ANY',    '/addnote',          ['NotehubController','add']],
+    ['ANY',    '/adminnote',          ['NotehubController','admin']],
 
 
 
