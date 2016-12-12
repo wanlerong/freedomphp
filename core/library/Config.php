@@ -9,9 +9,15 @@
 namespace FreedomPHP\Core\Library;
 
 class Config{
+    public static $file;
+
     public static function loadFile($filename)
     {
-        return include_once APP_PATH."/config/".$filename.".php";
+        if (empty(self::$file[$filename]))
+        {
+            self::$file[$filename] = include_once APP_PATH."/config/".$filename.".php";
+        }
+        return self::$file[$filename];
     }
     /**
      * @param $key
@@ -27,6 +33,7 @@ class Config{
         $filename = array_keys($filekey)[0];
 
         $config = self::loadFile($filename);
+
 
         reset($filekey);
 

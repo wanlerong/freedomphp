@@ -1,16 +1,5 @@
-// +----------------------------------------------------------------------
-// | Copyright (c) 2010-2013 http://www.YiiSpace.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: Micheal Chen <shilong.chen2012@gmail.com>
-// +----------------------------------------------------------------------
-// | FileName: 
-// +----------------------------------------------------------------------
-// | DateTime: 2016-12-08 16:26
-// +----------------------------------------------------------------------
-
-
+//新建note
 $(function () {
-    //防止表单重复提交
     $('#notehub_add_btn').formTodo({
         callback:function(url, method, data){
             //手动验证表单bootstrapValidator方法
@@ -21,7 +10,7 @@ $(function () {
         }
     });
 })
-
+//新建note 表单验证
 $(function () {
     // Generate a simple captcha
     function randomNumber(min, max) {
@@ -29,7 +18,7 @@ $(function () {
     };
     $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
 
-    //用户注册表单验证
+    //新建note 表单验证
     $('#notehub_add_form').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -63,3 +52,60 @@ $(function () {
     });
 
 });
+
+//新建blackbox
+$(function () {
+    $('#create_new_bbox').click(function () {
+        $('.new-blackbox').removeClass('hide');
+    })
+
+    $('#cancel-create').click(function () {
+        $('.new-blackbox').addClass('hide');
+    })
+
+    $('#add_blackbox_btn').formTodo({
+        callback:function(url, method, data){
+            //手动验证表单bootstrapValidator方法
+            $('#add_blackbox_form').data('bootstrapValidator').validate();
+            if ($('#add_blackbox_form').data('bootstrapValidator').isValid()){
+                return true;
+            }
+        }
+    });
+})
+
+//新建blackbox 表单验证
+$(function () {
+    // Generate a simple captcha
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
+    //新建blackbox 表单验证
+    $('#add_blackbox_form').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            name: {
+                message: 'note无效',
+                validators: {
+                    notEmpty: {
+                        message: 'note名称不能为空'
+                    },
+                    stringLength: {
+                        min: 2,
+                        max: 45,
+                        message: 'note名称必须在2~45字符之间'
+                    }
+                }
+            },
+        }
+    });
+
+});
+

@@ -21,7 +21,7 @@ class DataConfigLoader
         $con    = self::parseTable($table);
         $table  = $con['table'];
         $config = Config::get(array('database/'.$con['dir'].'/db' => array($con['table'])))[$con['table']];
-
+//        p($config);
         if (!$config) {
             throw new \Exception('db: '.$table.'对应的配置信息不存在');
         }

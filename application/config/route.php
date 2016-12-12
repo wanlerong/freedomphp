@@ -15,11 +15,11 @@ return array(
     /**
      * 用户模块
      */
-    ['ANY',    '/reg',              ['UserController','register']],
-    ['ANY',    '/check',            ['UserController','check']],
-    ['ANY',    '/login',            ['UserController','login']],
-    ['POST',   '/ckusername',       ['UserController','is_unique_username']], //ajax判断用户名是否存在
-    ['POST',   '/ckemail',          ['UserController','is_unique_email']], //ajax判断邮箱是否存在
+    ['ANY',    '/reg',              ['UserController','register']],             //注册模块
+    ['ANY',    '/check',            ['UserController','check']],                //验证邮件模块
+    ['ANY',    '/login',            ['UserController','login']],                //登录模块
+    ['POST',   '/ckusername',       ['UserController','is_unique_username']],   //ajax判断用户名是否存在
+    ['POST',   '/ckemail',          ['UserController','is_unique_email']],      //ajax判断邮箱是否存在
     /**
      * 开发测试
      */
@@ -27,9 +27,12 @@ return array(
     /**
      * Notehub模块
      */
-    ['ANY',    '/addnote',          ['NotehubController','add']],
-    ['ANY',    '/adminnote',          ['NotehubController','admin']],
-
+    ['ANY',    '/addnote',          ['NotehubController','add']],               //添加notehub
+    ['ANY',    '/adminnote',        ['NotehubController','admin']],             //管理notehub
+    /**
+     * Blackbox模块
+     */
+    ['ANY',    '/addbox',           ['BlackboxController','add']],              //ajax添加blackbox
 
 
 );

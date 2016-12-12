@@ -9,6 +9,7 @@ namespace App\Controller;
 
 use App\Model\UserModel;
 use FreedomPHP\Core\Email;
+use FreedomPHP\Core\Library\Config;
 
 class UserController extends CommonController{
 
@@ -180,6 +181,7 @@ EOF;
      * 测试
      */
     public function test(){
-        p($this->session);
+        p($this->BlackboxModel->get_up_levels(4));
+
     }
 }

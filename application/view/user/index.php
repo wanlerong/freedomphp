@@ -42,21 +42,21 @@
                           <div role="tabpanel" class="tab-pane active" id="note-all">
                               <ul>
                                   <?php foreach ($my_notes as $k=>$v): ?>
-                                <li class="public_note"><a href=""><?php echo $v['name'];?></a></li>
+                                <li class="public_note"><a href="/adminnote?id=<?php echo $v['id']; ?>"><?php echo $v['name'];?></a></li>
                                   <?php endforeach; ?>
                               </ul>
                           </div>
                           <div role="tabpanel" class="tab-pane" id="note-pub">
                                 <ul>
                                     <?php foreach ($my_public_notes as $v): ?>
-                                <li class="public_note"><a href=""><?php echo $v['name'];?></a></li>
+                                <li class="public_note"><a href="/adminnote?id=<?php echo $v['id']; ?>"><?php echo $v['name'];?></a></li>
                                     <?php endforeach; ?>
                               </ul>
                           </div>
                           <div role="tabpanel" class="tab-pane" id="note-pri">
                                 <ul>
                                     <?php foreach ($my_private_notes as $v): ?>
-                                <li class="public_note"><a href=""><?php echo $v['name'];?></a></li>
+                                <li class="public_note"><a href="/adminnote?id=<?php echo $v['id']; ?>"><?php echo $v['name'];?></a></li>
                                     <?php endforeach; ?>
                               </ul>
                           </div>

@@ -1,6 +1,8 @@
 body{padding-top: 48px;}
 .fb{background: #3b5998;}
 .fb1{background: #627aad;}
+.fafafa{background: #fafafa}
+
 .project-name{color: #fff;}
 .project-name:hover{color: #fff;}
 /*需要辅助col-md-3使用，只是覆盖一下它*/
@@ -9,10 +11,16 @@ body{padding-top: 48px;}
 
 .text-small { font-size: 12px !important; }
 .text-gray { color: #767676 !important; }
+.text-emphasized{    font-weight: 600; color: #333;}
 .text-lalign{text-align: left;}
+
 
 .martop20{margin-top: 20px;}
 .marleft10{margin-left: 10px;}
+.marbot20{margin-bottom: 20px;}
+.marbot0{margin-bottom: 0px;}
+.lineh31{line-height: 31px;}
+
 
 .navbar-nav>li.user-dropdown{}
 .navbar-nav>li.user-dropdown a.dropdown-toggle:hover,.navbar-nav>li.user-dropdown a.dropdown-toggle:active,.navbar-nav>li.user-dropdown a.dropdown-toggle:visited{background: #627aad;}

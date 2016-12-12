@@ -9,6 +9,7 @@ use FreedomPHP\Core\Library\Session;
 use FreedomPHP\Core\Library\Input;
 use App\Model\UserModel;
 use App\Model\NotehubModel;
+use App\Model\BlackboxModel;
 
 class CommonController extends Controller{
 
@@ -37,6 +38,10 @@ class CommonController extends Controller{
 
         $this->setProperty('NotehubModel', function () {
             return new NotehubModel();
+        });
+
+        $this->setProperty('BlackboxModel', function () {
+            return new BlackboxModel();
         });
 
         $this->setProperty('Session',function (){

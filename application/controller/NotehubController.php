@@ -1,9 +1,4 @@
 <?php
-// | Author: wanlr
-// +----------------------------------------------------------------------
-// | DateTime: 2016-12-08 15:12
-// +----------------------------------------------------------------------
-
 
 namespace App\Controller;
 
@@ -19,9 +14,6 @@ class NotehubController extends CommonController
 
     public function add()
     {
-//        $data = $this->NotehubModel->builder->find(10);
-//        p($data);die;
-
         if (IS_POST){
             $name = $this->Input->post('name');
             $desc = $this->Input->post('desc');
@@ -54,7 +46,26 @@ class NotehubController extends CommonController
      */
     public function admin(){
         $data = array();
+        $data['blackboxes'] = array();
+        $id = $this->Input->get('id');
+        //接收当前blackbox的id
+        $blackbox_id = empty($this->Input->get('blackbox_id')) ? 0 : $this->Input->get('blackbox_id');
+        $data['cur_box_id'] = $blackbox_id; //对于创建的box来说，当前box_id即为父级id
+
+        //获取当前blackbox下的所有子集
+        if ($blackbox_id === 0 ){
+            //获取该notehub的所有顶级的blackbox
+            $data['blackboxes'] = $this->BlackboxModel->builder->where(array('notehub_id'=>$id,'parent_id'=>0))->get();
+        }else{
+            $data['blackboxes'] = $this->BlackboxModel->builder->where(array('notehub_id'=>$id,'parent_id'=>$blackbox_id))->get();
+        }
+
+
+        $data['info'] = $this->NotehubModel->builder->where(array('id'=>$id))->first();
+        //面包屑导航
+        $data['bread_array'] = $this->BlackboxModel->get_up_levels($blackbox_id);
 
         $this->display('notehub/admin',$data);
     }
+
 }
