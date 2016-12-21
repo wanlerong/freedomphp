@@ -1,4 +1,6 @@
-//新建note
+/**
+ * 新建notehub
+ */
 $(function () {
     $('#notehub_add_btn').formTodo({
         callback:function(url, method, data){
@@ -9,8 +11,10 @@ $(function () {
             }
         }
     });
-})
-//新建note 表单验证
+});
+/**
+ *  新建notehub 表单验证
+ */
 $(function () {
     // Generate a simple captcha
     function randomNumber(min, max) {
@@ -52,8 +56,9 @@ $(function () {
     });
 
 });
-
-//新建blackbox
+/**
+ * 新建blackbox
+ */
 $(function () {
     $('#create_new_bbox').click(function () {
         $('.new-blackbox').removeClass('hide');
@@ -72,9 +77,12 @@ $(function () {
             }
         }
     });
-})
+});
 
-//新建blackbox 表单验证
+
+/**
+ * 新建blackbox 表单验证
+ */
 $(function () {
     // Generate a simple captcha
     function randomNumber(min, max) {
@@ -107,5 +115,88 @@ $(function () {
         }
     });
 
+    /**
+     * 删除blackbox
+     */
+    $('.delete-blackbox').click(function () {
+        if (confirm("确认要删除？")) {
+            var url = $(this).attr('data-url');
+            var id = $(this).attr('data-id');
+            $.ajax({
+                type : "post",
+                url : url,
+                data : {
+                    "id" : id
+                },
+                dataType:'json',
+                success : function(result) {
+                    if ( result.code == $.xy.statusCode.success ) {
+                        var cur_tr = $(".delete-blackbox[data-id="+result.id+"]").parent().parent();
+                        cur_tr.hide();
+                    }else {
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    });
+
+    /**
+     * 回收站:blackbox
+     */
+    $('#recycle_list_btn').click(function () {
+        var notehub_id = $(this).attr('data-notehub-id');
+        $.ajax({
+            type : "post",
+            url : '/rebox',
+            data : {
+                "notehub_id" : notehub_id,
+                'act'        : 'getlist'
+            },
+            dataType:'json',
+            success : function(result) {
+                if ( result.code == $.xy.statusCode.success ) {
+                    var str='<ul>';
+                    for (var i=0;i<result.data.length;i++)
+                    {
+                        str+= '<li><input name="rebox_id[]" type="checkbox" value="'+result.data[i].id+'"/>';
+                        str+= result.data[i].name;
+                        str+= '</li>';
+                    }
+                    str+='</ul>';
+                    $('.modal-body').html(str);
+                }
+            }
+        });
+    });
+
+    /**
+     * 回收站还原提交
+     */
+    $('#recycle_btn').formTodo({
+        callback:function(url, method, data){
+            var flag = true;
+
+            console.log(data['rebox_id[]']);console.log(data['rebox_id[]'].length);console.log(typeof (data['rebox_id[]']));
+
+            if (typeof (data['rebox_id[]']) === 'string' && !data['rebox_id[]'].isInteger()){
+                return false;
+            }
+
+            if (typeof (data['rebox_id[]']) === 'object' ){
+                $.each(data['rebox_id[]'],function (i,v) {
+                    if(!v.isInteger() || v.isEmpty()){
+                        flag = false;
+                    }
+                });
+            }
+            return flag;
+        }
+    });
+
+
 });
+
+
+
 

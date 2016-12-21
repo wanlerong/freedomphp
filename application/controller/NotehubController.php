@@ -55,9 +55,9 @@ class NotehubController extends CommonController
         //获取当前blackbox下的所有子集
         if ($blackbox_id === 0 ){
             //获取该notehub的所有顶级的blackbox
-            $data['blackboxes'] = $this->BlackboxModel->builder->where(array('notehub_id'=>$id,'parent_id'=>0))->get();
+            $data['blackboxes'] = $this->BlackboxModel->builder->where(array('notehub_id'=>$id,'parent_id'=>0,'status'=>0))->get();
         }else{
-            $data['blackboxes'] = $this->BlackboxModel->builder->where(array('notehub_id'=>$id,'parent_id'=>$blackbox_id))->get();
+            $data['blackboxes'] = $this->BlackboxModel->builder->where(array('notehub_id'=>$id,'parent_id'=>$blackbox_id,'status'=>0))->get();
         }
 
 

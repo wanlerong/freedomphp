@@ -54,22 +54,23 @@
                     <li class="commits"><a href=""><span class="glyphicon glyphicon-wrench"></span>&nbsp;<span class="text-emphasized">21</span>&nbsp;修改</a></li>
                     <li class="commits"><a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="text-emphasized">1</span>&nbsp;贡献者</a></li>
                 </ul>
-
             </div>
         </div>
     </div>
 
     <div class="martop20">
-        <div class="pull-left">
+
+        <div class="btn-group pull-left">
             <button type="button" class="btn btn-default">查看笔记</button>
+            <button type="button" class="btn btn-default" id="create_new_bbox">创建新note</button>
         </div>
 
         <div class="pull-left">
             <ol class="breadcrumb">
-                <li><a href="/adminnote?id=<?php echo $info['id'];?>"><?php echo $info['name'];?></a></li>
+                <li><a href="<?php echo furl('adminnote',['id'=>$info['id']]);?>"><?php echo $info['name'];?></a></li>
                 <?php foreach ($bread_array as $v): ?>
                     <li class="<?php if ($cur_box_id == $v['id'])echo 'active';?>">
-                        <a href="/adminnote?id=<?php echo $info['id'];?>&blackbox_id=<?php echo $v['id'];?>"><?php echo $v['name'];?></a>
+                        <a href="<?php echo ($cur_box_id == $v['id'])? 'javascript:;' : furl('adminnote',['id'=>$info['id'],'blackbox_id'=>$v['id']]);?>"><?php echo $v['name'];?></a>
                     </li>
                 <?php endforeach; ?>
             </ol>
@@ -77,7 +78,7 @@
 
 
         <div class="btn-group pull-right">
-          <button type="button" class="btn btn-default" id="create_new_bbox">创建新note</button>
+          <button type="button" data-notehub-id="<?php echo $info['id'];?>" id="recycle_list_btn" class="btn btn-default" data-toggle="modal" data-target="#recycle">回收站</button>
           <button type="button" class="btn btn-default">下载笔记</button>
         </div>
     </div>
@@ -114,14 +115,15 @@
             </tr>
             <?php foreach ($blackboxes as $v):?>
             <tr>
-                <td><a href="/adminnote?id=<?php echo $info['id'];?>&blackbox_id=<?php echo $v['id'];?>"><?php echo $v['name'];?></a></td>
+                <td><a href="<?php echo furl('adminnote',['id'=>$info['id'],'blackbox_id'=>$v['id']]);?>"><?php echo $v['name'];?></a></td>
                 <td>刚刚</td>
                 <td>
-                    <a href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="<?php echo furl('editbox',['id'=>$v['id']]);?>" class="marright10"><span class="glyphicon glyphicon-edit">编辑</span></a>
+                    <a data-url="/delbox" data-id="<?php echo $v['id'];?>" href="javascript:;" class="delete-blackbox marleft10"><span class="glyphicon glyphicon-trash">删除</span></a>
                 </td>
             </tr>
             <?php endforeach; ?>
         </table>
     </div>
+    <?php \App\Library\Html::modal('recycle','还原','recycle_btn','回收站','recycle_form','/rebox','recycle');  ?>
 </div>

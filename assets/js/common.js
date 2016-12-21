@@ -157,7 +157,10 @@
         $('.submit_btn').button('reset');
         $.xy.debug(json);
         if(json[$.xy.keys.code] == $.xy.statusCode.failed) {
-            alert('提示：'+json[$.xy.keys.msg]);
+
+            if(json[$.xy.keys.msg] != 'quiet') {
+                alert('提示：' + json[$.xy.keys.msg]);
+            }
 
             if(json.data){
                 if(json.data['forward'] == 'reload'){
@@ -187,7 +190,10 @@
         }else if (json[$.xy.keys.code] == $.xy.statusCode.success){
             $.xy.debug(json);
 
-            alert(json[$.xy.keys.msg]);
+            //是否开启安静模式,成功不弹窗直接跳转。
+            if(json[$.xy.keys.msg] != 'quiet'){
+                alert(json[$.xy.keys.msg]);
+            }
 
             if(json.data){
                 if(json.data['forward'] == 'reload'){

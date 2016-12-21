@@ -63,6 +63,7 @@ class Input
         // If $index is NULL, it means that the whole $array is requested
         isset($index) OR $index = array_keys($array);
 
+
         // allow fetching multiple keys at once
         if (is_array($index))
         {
@@ -87,16 +88,30 @@ class Input
 
     /**
      * 过滤方法
+     * 如果是数组,就放到array_walk中过滤,然后返回
+     * 不是数组,直接过滤返回
      * @param $dirty_html
      * @param $off_html 是否将html代码转化成实体
      * @return mixed
      */
     public function Fliter($dirty_html,$off_html=true){
-        $clean_html = $this->purifier->purify($dirty_html);
-        if ($off_html){
+        if (is_array($dirty_html)){
+            //用回调函数过滤数组中的单元
+            if (array_walk($dirty_html, array($this, 'callbackfliter'))){
+                //如果过滤完毕
+               return $dirty_html;
+            }
+        }elseif($off_html){
+            $clean_html = $this->purifier->purify($dirty_html);
             $clean_html = htmlspecialchars($clean_html);
+        }else{
+            $clean_html = $this->purifier->purify($dirty_html);
         }
         return $clean_html;
+    }
+
+    public function callbackfliter(&$value){
+        $value = $this->Fliter($value);
     }
 }
 

@@ -544,9 +544,6 @@ class DB
         $tmp_time = microtime(1) - $tmp_time;
         $this->logDebug(sprintf("[T] consumed %.5f sec", $tmp_time));
 
-        if ($tmp_time > DATABASE_LOG_SQL_TIME) {
-            $this->external_logger->alert(sprintf("[Q] [%s] %s; [R] %.5f sec consumed", date("m/d H:i:s"), $sql, $tmp_time));
-        }
 
         if ($fetch !== false) {
 

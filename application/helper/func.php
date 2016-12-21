@@ -38,6 +38,28 @@ if (! function_exists('site_url')) {
     }
 }
 
+if (! function_exists('furl')) {
+    /**
+     * 拼接链接地址
+     *
+     * @param $controller
+     * @param $action
+     * @param $params
+     * @return string
+     */
+    function furl($route = null, $params = array())
+    {
+        $url_str = '';
+
+        foreach ((array)$params as $k => $v) {
+            $url_str .= ($url_str ? '&' : '?').$k.'='.$v;
+        }
+
+        return BASE_URL . '/'.$route.$url_str;
+    }
+}
+
+
 if (! function_exists('my_md5')) {
     /**
      * md5加密

@@ -32,7 +32,10 @@ return array(
     /**
      * Blackbox模块
      */
-    ['ANY',    '/addbox',           ['BlackboxController','add']],              //ajax添加blackbox
+    ['POST',    '/addbox',           ['BlackboxController','add']],              //添加blackbox
+    ['POST',    '/delbox',           ['BlackboxController','delete']],           //删除blackbox
+    ['POST',    '/rebox',            ['BlackboxController','recycle']],          //回收站
+    ['ANY',     '/editbox',          ['BlackboxController','edit']],             //编辑blackbox
 
 
 );

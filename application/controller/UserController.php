@@ -108,7 +108,7 @@ EOF;
                     'email'     =>  $data['email'],
                 );
                 $this->Session->set_userdata($user_session);
-                $this->ajaxReturn(AJ_RET_SUCC,'登录成功',array('forward'=>BASE_URL));
+                $this->ajaxReturn(AJ_RET_SUCC,'quiet',array('forward'=>BASE_URL));
             }
         }
 
@@ -181,7 +181,10 @@ EOF;
      * 测试
      */
     public function test(){
-        p($this->BlackboxModel->get_up_levels(4));
 
+        p(furl('abc',array('a'=>12,'s'=>'sd')));
     }
+
+
+
 }
